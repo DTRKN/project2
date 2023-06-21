@@ -1,9 +1,10 @@
-from flask_sqlalchemy import SQLAlchemy
+from api.db.base_class import Base
+from sqlalchemy import Column, String, Integer
 
-db = SQLAlchemy()
-class User(db.Model):
+class User(Base):
+
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.String)
-    token = db.Column(db.String)
-
+    id = Column(Integer, primary_key=True)
+    user = Column(String)
+    token = Column(String)
+    audio_file = Column(String)

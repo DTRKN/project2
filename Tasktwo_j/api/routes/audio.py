@@ -1,7 +1,4 @@
-from flask import Flask
-
-app = Flask(__name__)
-app.config['DEBUG'] = True
+from api.db.session import app
 
 @app.route('/download_audio_file', methods=['POST'])
 def download():

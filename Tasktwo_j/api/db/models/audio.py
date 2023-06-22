@@ -1,9 +1,10 @@
-from flask_sqlalchemy import SQLAlchemy
+from api.db.base_class import Base
+from sqlalchemy import Column, String, Integer
 
-db = SQLAlchemy()
+class Audio(Base):
 
-class Audio(db.Model):
     __tablename__ = 'audio'
-    id = db.Column(db.Integer, primary_key=True)
-    audio_file = db.Column(db.String)
-    token = db.Column(db.String)
+    id = Column(Integer, primary_key=True)
+    audio_file = Column(String)
+    token = Column(String)
+    status = Column(Integer, default=0)

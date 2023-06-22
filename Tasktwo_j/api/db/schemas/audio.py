@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
-class Audio(BaseModel):
+class AudioBase(BaseModel):
     audio_file: str
     token: str
+

@@ -1,5 +1,8 @@
 from pydantic import BaseModel
 
-class User(BaseModel):
+class UserBase(BaseModel):
     name: str
     token: str
+
+class UserAudio(UserBase):
+    audio_file: str

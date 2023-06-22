@@ -1,6 +1,5 @@
 
 from flask import Flask, request, jsonify
-from api.db.models.user import db, User, Audio
 import uuid
 import os
 import logging

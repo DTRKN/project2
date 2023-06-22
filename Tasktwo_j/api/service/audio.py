@@ -2,7 +2,7 @@ from api.db.schemas.audio import AudioBase
 from api.db.models.audio import Audio
 from api.db.session import db
 
-class UserController:
+class AudioController:
 
     def audio_create(self, audio: AudioBase):
         with db.session as session:

@@ -7,4 +7,4 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     user = Column(String)
     token = Column(String)
-    audio_file = Column(String)
+    audio_file = Column(String, default=None)

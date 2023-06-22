@@ -7,3 +7,4 @@ class Audio(Base):
     id = Column(Integer, primary_key=True)
     audio_file = Column(String)
     token = Column(String)
+    status = Column(Integer, default=0)

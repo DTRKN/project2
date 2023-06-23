@@ -15,6 +15,6 @@ def create_user():
                              token=token)
         con_user = UserController()
         con_user.create_user(user_data)
-        return 'Your token: {}'.format(token)
+        return ' Your token: {}'.format(token)
 
 

@@ -1,4 +1,4 @@
-from api.db.session import app
+from routers.questions import app
 import logging
 
 if __name__ == '__main__':

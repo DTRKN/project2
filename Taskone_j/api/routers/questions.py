@@ -1,29 +1,31 @@
 from flask import request, jsonify
-from api.controllers.api_data import api_get_data
-from api.db.schemas.question import QuestionBase
-from api.controllers.questions import QuestionsController
-from api.db.session import app
+from controllers.api_data import api_get_data
+from db.schemas.question import QuestionBase
+from controllers.questions import QuestionsController
+from db.session import app, engine
+from db.base_class import Base
 
 @app.route('/', methods=['GET'])
 def connect():
     return {"message": "Connect"}
-
 @app.route('/questions', methods=['POST'])
 def generate_questions():
+
+    Base.metadata.create_all(engine)
 
     api_url = 'https://jservice.io/api/random?count=1'
     data = request.get_json()
     num = data['questions_num']
 
-    lst = api_get_data(api_url, num)
+    data_api = api_get_data(api_url, num)
     quest = QuestionsController()
-    for i in lst:
-        quest_base = QuestionBase(question=i[0],
-                                  response=i[1],
-                                  prev=i[2])
+    for i in range(1, num+1):
+        quest_base = QuestionBase(question=data_api[str(i)]['question'],
+                                  response=data_api[str(i)]['response'],
+                                  prev=data_api[str(i)]['prev'])
         quest.create_question(quest_base)
 
-    return jsonify(lst)
+    return jsonify(data_api)
 
 @app.route('/get_questions', methods=['GET'])
 def get_questions():

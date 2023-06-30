@@ -18,7 +18,7 @@ POSTGRES_DB=YOUR_DB
 3. Создайте виртуальное окружение и активируйте его:
 
 ```bash
-python3 -m venv env
+python3 -m .venv env
 source env/bin/activate
 ```
 4. Откройте терминал и перейдите в корневую папку репозитория.

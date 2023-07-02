@@ -12,6 +12,6 @@ db_name = os.environ.get('POSTGRES_DB')
 db_host = os.environ.get('DB_HOST')
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{db_user}:{db_password}@{db_host}:5432/{db_name}"
-app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://postgres:tarawater@localhost:5432/project2"
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://postgres:(...)@localhost:5432/project2"
 db = SQLAlchemy(app)
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])

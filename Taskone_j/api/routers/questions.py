@@ -31,13 +31,16 @@ def generate_questions():
 def get_questions():
 
     quest = QuestionsController()
-    quest.get_all_questions()
+    questions = quest.get_all_questions()
+    return jsonify(questions)
+
 
 @app.route('/drop_db', methods=['GET'])
 def drop_questions():
 
     quest = QuestionsController()
-    quest.drop_all_quesions()
+    result = quest.drop_all_quesions()
+    return jsonify(result)
 
 
 

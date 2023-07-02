@@ -22,7 +22,6 @@ def api_get_data(api: str, num: int) -> dict:
                     'response': response_text,
                     'prev': prev
                 }
-                print(f'{len(dict_data)} Append question: {question_text}, response: {response_text}, prev: {prev}')
                 prev = question_text
         else:
             raise ConnectionError(f'Error {response.status_code}. Check api url')

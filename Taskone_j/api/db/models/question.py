@@ -9,6 +9,6 @@ class Questions(Base):
     text_question = Column(String(255))
     text_response = Column(String(255))
     prev = Column(String(255))
-    date = Column(DateTime, default=datetime)
+
 
 

@@ -1,6 +1,7 @@
 from db.models.question import Questions
 from db.schemas.question import QuestionBase
-from db.session import db
+from db.session import db, engine
+from db.base_class import Base
 
 
 class QuestionsController:
@@ -18,16 +19,21 @@ class QuestionsController:
     def get_all_questions(self):
         with db.session() as session:
             try:
-                question = session.query(Questions).all()
+                questions_db = session.query(Questions).all()
             except ConnectionError:
                 return "Not data in DB"
 
-        return question
+            result = []
+            for question in questions_db:
+                result.append({"id": question.id,
+                                "question": question.text_question,
+                                "response": question.text_response,
+                                "prev": question.prev})
+            return result
 
     def drop_all_quesions(self):
-        db.drop_all()
-
         try:
-            return 'Accept DB drop'
-        except:
-            raise Exception('Error db')
+            Base.metadata.drop_all(engine)
+            return 'All tables dropped successfully'
+        except Exception as e:
+            return f'An error occurred: {str(e)}'

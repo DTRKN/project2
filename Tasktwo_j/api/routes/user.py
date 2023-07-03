@@ -4,12 +4,14 @@ from db.models.user import User
 from db.schemas.user import UserBase
 from flask import request, jsonify
 from uuid import uuid4
-from db.session import db
+from db.session import db, engine
+from db.base_class import Base
 
-# IVA
-# 6f691f59-4943-4f4e-befb-ffec2b26f3e3
 @app.route('/create_user', methods=['POST'])
 def create_user():
+
+    Base.metadata.create_all(engine)
+
     session = db.session()
     response = request.get_json()
     get_user = response['name']

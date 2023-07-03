@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from flask import Flask
 import os
 
+
 app = Flask(__name__)
 
 db_user = os.environ.get('POSTGRES_USER')
@@ -16,4 +17,5 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://postgres:{os.getenv('DB_P
 
 db = SQLAlchemy(app)
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+
 

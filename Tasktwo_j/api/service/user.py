@@ -12,12 +12,13 @@ class UserController:
             session.commit()
             session.refresh(data)
 
-    def get_user_id(self, id):
+    def get_user_id(self, index):
         with db.session() as session:
             try:
-                session.query(User).filter_by(id=id).first()
+                session.query(User).filter_by(id=index).first()
             except:
                 return 'User is none'
+
     def view_users(self):
         with db.session() as session:
             try:

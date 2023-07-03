@@ -6,16 +6,34 @@ class AudioController:
 
     def audio_create(self, audio: AudioBase):
         with db.session() as session:
-            data = Audio(audio=audio.audio_file,
+            data = Audio(audio_file=audio.audio_file,
                          token=audio.token)
+            audio_copy = session.query(Audio.id).filter_by(audio_file=audio.audio_file).first()
+            if audio_copy:
+                return audio_copy
             session.add(data)
             session.commit()
             session.refresh(data)
-            return audio.audio_file
+            return session.query(Audio.id).filter_by(audio_file=audio.audio_file).first()
 
-    def get_audio_file(self, index):
+    def get_audio_file_id(self, index):
         with db.session() as session:
-            audio = session.query(Audio).filter_by(id=index).first()
+            audio = session.query(Audio.audio_file).filter_by(id=index).first()
         return audio
+
+    def view_audio(self):
+        with db.session() as session:
+            try:
+                audio = session.query(Audio).all()
+            except ConnectionError:
+                return 'Not users in DB'
+
+            result = []
+            for get_audio in audio:
+                result.append({'id': get_audio.id,
+                               'audio_file': get_audio.audio_file,
+                               'token': get_audio.token})
+            return result
+
 
 

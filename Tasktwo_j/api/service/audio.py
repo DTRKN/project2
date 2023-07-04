@@ -9,12 +9,12 @@ class AudioController:
             data = Audio(audio_file=audio.audio_file,
                          token=audio.token)
             audio_copy = session.query(Audio.id).filter_by(audio_file=audio.audio_file).first()
-            if audio_copy:
-                return audio_copy
-            session.add(data)
-            session.commit()
-            session.refresh(data)
-            return session.query(Audio.id).filter_by(audio_file=audio.audio_file).first()
+            if not audio_copy:
+                session.add(data)
+                session.commit()
+                session.refresh(data)
+                return session.query(Audio.id).filter_by(audio_file=audio.audio_file).first()
+            return audio_copy
 
     def get_audio_file_id(self, index):
         with db.session() as session:

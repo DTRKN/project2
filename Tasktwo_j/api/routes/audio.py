@@ -1,4 +1,6 @@
+import base64
 import binascii
+import zlib
 
 from db.session import app
 from flask import request, jsonify
@@ -46,7 +48,6 @@ def Adding_audio_file():
     else:
         return 'User not found'
 
-
 @app.route('/record/id=<id_audio_file>/user=<id_user>',  methods=['GET'])
 def url_download(id_audio_file, id_user):
     user_cont = UserController()
@@ -54,8 +55,7 @@ def url_download(id_audio_file, id_user):
     audio_con = AudioController()
     audio_file = audio_con.get_audio_file_id(id_audio_file)
 
-    # ?
-    return jsonify(str(audio_file[0]))
+    return jsonify({"url_audio_mp3": audio_file[0]})
 @app.route('/view_audio', methods=['GET'])
 def view_audio():
     audio_cont = AudioController()
